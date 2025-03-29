@@ -60,7 +60,7 @@ curl -so files/root/.bashrc https://git.kejizero.online/zhao/files/raw/branch/ma
 cp -f package/openwrt-package/banner  package/base-files/files/etc/banner
 
 # default LAN IP
-sed -i "s/192.168.1.1/10.0.0.1/g" package/base-files/files/bin/config_generate
+sed -i "s/192.168.1.1/10.10.10.253/g" package/base-files/files/bin/config_generate
 
 # 修改名称
 sed -i 's/OpenWrt/ZeroWrt/' package/base-files/files/bin/config_generate
@@ -178,6 +178,14 @@ sed -i 's#<a class="luci-link" href="https://github.com/openwrt/luci" target="_b
 sed -i 's|<a href="https://github.com/jerrykuku/luci-theme-argon" target="_blank">ArgonTheme <%# vPKG_VERSION %></a>|<a href="https://github.com/oppen321/ZeroWrt-Action" target="_blank">ZeroWrt-Action</a> |g' package/openwrt-package/luci-theme-argon/luasrc/view/themes/argon/footer.htm
 sed -i 's#<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank">Powered by <%= ver.luciname %> (<%= ver.luciversion %>)</a> /#<a class="luci-link" href="https://www.kejizero.online" target="_blank">探索无限</a> /#' package/openwrt-package/luci-theme-argon/luasrc/view/themes/argon/footer_login.htm
 sed -i 's|<a href="https://github.com/jerrykuku/luci-theme-argon" target="_blank">ArgonTheme <%# vPKG_VERSION %></a>|<a href="https://github.com/oppen321/ZeroWrt-Action" target="_blank">ZeroWrt-Action</a> |g' package/openwrt-package/luci-theme-argon/luasrc/view/themes/argon/footer_login.htm
+
+# ZeroWrt选项菜单
+mkdir -p files/bin
+curl -L -o files/bin/ZeroWrt https://git.kejizero.online/zhao/files/raw/branch/main/bin/ZeroWrt
+chmod +x files/bin/ZeroWrt
+mkdir -p files/root
+curl -L -o files/root/version.txt https://git.kejizero.online/zhao/files/raw/branch/main/bin/version.txt
+chmod +x files/root/version.txt
 
 # update feeds
 ./scripts/feeds update -a
